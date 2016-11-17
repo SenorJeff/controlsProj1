@@ -14,14 +14,15 @@ def NoControl(plant):
     return control.step_response(plant, T)
 
 def PIDControl(plant):
-    kP = 1 
+    kP = 1
     kI = 1
-    kD = 1 
+    kD = 0 
     P = kP
     I = kI/s
     D = s*kD
+    PID = P + I + D
 
-    output = (P+I+D)*plant / (1 + (P+I+D)*plant)
+    output = (PID*plant) / (1 + PID*plant)
 
     return control.step_response(output, T)
 
@@ -44,7 +45,8 @@ if __name__ == "__main__":
     t3, y3 = LQRControl(plant)
 
     plt.figure()
-    plt.plot(t1, y1)
-    plt.plot(t2, y2)
-    plt.plot(t3, y3)
+    l1, = plt.plot(t1, y1, label="No Control")
+    l2, = plt.plot(t2, y2, label="PID Control")
+    l3, = plt.plot(t3, y3, label="LQR Control")
+    plt.legend(handles=[l1,l2,l3])
     plt.show()
