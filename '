@@ -1,0 +1,19 @@
+import finalComparison as fc
+import control
+import numpy as np
+import matplotlib.pyplot as plt
+
+plant, PIDTuning, LQRTuning = fc.firstOrderSystem()
+
+k = np.linspace(0.1, 0.1, 1)
+t = []
+y = []
+for i in range(0, len(k)-1):
+    t[i], y[i] = fc.PIDControl(plant, k[i], 0, 0)
+
+plt.figure()
+for i in range(0, len(t)-1):
+    plt.plot(t[i], y[i]) 
+    break
+
+
