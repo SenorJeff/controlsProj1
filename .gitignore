@@ -2,4 +2,6 @@
 *.swo
 *.swm
 *.swn
+*.pyc
+*.pyo
 env/
